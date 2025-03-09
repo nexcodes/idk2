@@ -21,6 +21,9 @@ export const auth = betterAuth({
       referralCode: {
         type: "string",
       },
+      balance: {
+        type: "number",
+      },
     },
   },
   emailAndPassword: {

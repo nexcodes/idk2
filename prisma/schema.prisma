@@ -21,6 +21,7 @@ model User {
   emailVerified Boolean
   image         String?
   referralCode  String?
+  balance       Int       @default(0)
   createdAt     DateTime
   updatedAt     DateTime
   sessions      Session[]
@@ -73,4 +74,55 @@ model Verification {
   updatedAt  DateTime?
 
   @@map("verification")
+}
+
+// Bank details model - only one record will be used
+model BankDetails {
+  id          String   @id @default(uuid())
+  bankName    String
+  accountName String
+  accountNo   String
+  ifscCode    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// Crypto details model - only one record will be used
+model CryptoDetails {
+  id            String   @id @default(uuid())
+  walletAddress String
+  currencyName  String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+// QR image model - only one record will be used
+model QrImage {
+  id        String   @id @default(uuid())
+  filename  String
+  filepath  String   @unique
+  mimetype  String
+  size      Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Price {
+  id        String   @id @default(uuid())
+  price     Float
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Withdraws {
+  id          String @id @default(uuid())
+  amount      Int
+  BMCPrice    Int
+  bankName    String
+  accountName String
+  accountNo   String
+  ifscCode    String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
